@@ -3,12 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pca import *
 import seaborn as sn
-# wine data
 
-wine = pd.read_csv("wine.csv")
-x = np.array(wine)[:, :-1]
-y = np.array(wine)[:, -1]
-y = np.array(y == "good").astype(int)
 
 
 def add_intercept(x):
@@ -96,56 +91,6 @@ class Logit:
         print(len(labels))
         return labels
 
-    def score(self):
-        return 2
 
-    def confusion_matrix(self):
-        return 2
-
-
-
-if __name__ == '__main__':
-    # no pca and variable selection
-    #pca = Pca(x, d=6)
-    #r_proj = pca.reduced_x
-    #f = lambda u: u.real
-    #x = f(r_proj)
-
-    x = standardized_matrix(x)
-
-    x = x[:, [0, 10]]
-
-    # cut one part:
-    x = x[:1000, :]
-
-    x_train = x[:900, :]
-    y_train = y[:900]
-    x_test = x[900:, :]
-    y_test =y[900:]
-
-
-    A = Logit(x = x_train, y = y_train, epochs=5000, learning_rate=0.002)
-
-    b = A.predict(x_test= x_test)
-
-    true_data = np.array(wine)[900:, -1]
-    #print([i == j for (i, j) in zip(b, true_data)])
-    print(sum(np.array([i == j for (i, j) in zip(b, true_data)]).astype(int)))
-    print(sum(np.array([i == j for (i, j) in zip(b, true_data)]).astype(int))/99)
-
-    # let's compare both group through pair plot: true groups and returned
-    # groups from LR
-
-
-    # plot our training results
-    df1 = pd.DataFrame(x_test)
-    df1["quality"] = b
-    sn.pairplot(df1, hue="quality")
-    plt.show()
-
-    df = pd.DataFrame(x_test)
-    df["quality"] = wine["quality"]
-    sn.pairplot(df, hue="quality")
-    plt.show()
 
 
