@@ -1,3 +1,4 @@
-# ML_Toolbox_Kmeans_from_scratch
+# ML_Toolbox
 
-Simple python class for the implementation of the kmeans clustering algorithm (unsupervised)
+A few python files implementing classes of well known Machine Learning algorithm from scratch, whether for regression, classification or clustering algorithm. 
+
